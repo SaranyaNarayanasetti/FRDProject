@@ -1,6 +1,7 @@
 
 	$breakpoints: () !global;
 
+	
 	$vendor-prefixes: (
 		'-moz-',
 		'-webkit-',
@@ -48,6 +49,7 @@
 		'user-select'
 	);
 
+	
 	$vendor-values: (
 		'filter',
 		'flex',
@@ -113,7 +115,7 @@
 
 	}
 
-	
+
 	@function val($map, $keys...) {
 
 		@if nth($keys, 1) == null {
@@ -171,10 +173,10 @@
 		}
 	}
 
-
+	
 	@mixin containers($width) {
 
-		
+		// Locked?
 			$lock: false;
 
 			@if length($width) == 2 {
@@ -182,13 +184,13 @@
 				$lock: true;
 			}
 
-	
+		
 			.container.\31 25\25		{ width: 100%; max-width: $width * 1.25; min-width: $width; }
 			.container.\37 5\25			{ width: $width * 0.75; }
 			.container.\35 0\25			{ width: $width * 0.5; }
 			.container.\32 5\25			{ width: $width * 0.25; }
 
-	
+		
 			.container {
 				@if $lock {
 					width: $width !important;
@@ -203,14 +205,14 @@
 	
 	@mixin grid($gutters: 40px, $breakpointName: null) {
 
-		
+	
 			@include grid-gutters($gutters);
 			@include grid-gutters($gutters, \32 00\25, 2);
 			@include grid-gutters($gutters, \31 50\25, 1.5);
 			@include grid-gutters($gutters, \35 0\25, 0.5);
 			@include grid-gutters($gutters, \32 5\25, 0.25);
 
-		
+	
 			$x: '';
 
 			@if $breakpointName {
@@ -267,7 +269,7 @@
 				$gutters: ($gutters, 0);
 			}
 
-	
+		
 			$c: nth($gutters, 1);
 			$r: nth($gutters, 2);
 
@@ -298,7 +300,7 @@
 
 	}
 
-	
+
 	@mixin skel-breakpoints($x: ()) {
 		$breakpoints: $x !global;
 	}
@@ -320,35 +322,34 @@
 
 			@if $x {
 
-				
+			
 
 				@include reset($x);
 
 			}
 
-		
+	
 			$x: map-get($config, 'boxModel');
 
 			@if $x {
 
 				
+
 				@include boxModel($x);
 
 			}
 
-		
 			$containers: map-get($config, 'containers');
 
 			@if $containers {
 
-			
 
 				.container {
 					margin-left: auto;
 					margin-right: auto;
 				}
 
-			
+	
 					@if $containers == true {
 						$containers: 960px;
 					}
@@ -356,10 +357,10 @@
 				
 					@include containers($containers);
 
-				
+	
 					@each $name in map-keys($breakpoints) {
 
-						
+				
 							$x: map-get($configPerBreakpoint, $name);
 
 							
@@ -373,6 +374,7 @@
 
 								}
 
+						
 							@media screen and #{map-get($breakpoints, $name)} {
 								@include containers($containers);
 							}
@@ -381,12 +383,14 @@
 
 			}
 
-		
+	
 			$grid: map-get($config, 'grid');
 
 			@if $grid {
 
-			
+				
+
+				
 					@if $grid == true {
 						$grid: ();
 					}
@@ -399,7 +403,7 @@
 						$grid-gutters: $x;
 					}
 
-				
+			
 					.row {
 						border-bottom: solid 1px transparent;
 						-moz-box-sizing: border-box;
@@ -429,7 +433,7 @@
 						margin-bottom: 0;
 					}
 
-				
+			
 					@include grid-gutters($grid-gutters, \30 \25, 0);
 
 				
@@ -441,14 +445,14 @@
 						
 							$x: map-get($configPerBreakpoint, $name);
 
-							
+					
 								@if $x {
 									$y: map-get($x, 'grid');
 
 									
 										@if $y {
 
-											
+										
 												$x: map-get($y, 'gutters');
 
 												@if $x {
@@ -470,7 +474,7 @@
 
 	}
 
-
+	
 	@mixin reset($mode: 'normalize') {
 
 		@if $mode == 'normalize' {
@@ -491,7 +495,6 @@
 	
 	@mixin vendor($property, $value) {
 
-		
 			$expandProperty: index($vendor-properties, $property);
 
 		
@@ -515,6 +518,7 @@
 			    }
 			}
 
+	
 			@elseif $expandValue {
 			    @each $vendor in $vendor-prefixes {
 			        #{$property}: #{str-replace-all($value, '-prefix-', $vendor)};
