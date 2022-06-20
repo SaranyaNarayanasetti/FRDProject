@@ -2,7 +2,7 @@
 
 Deployed Website Link: https://icy-ocean-091637910.1.azurestaticapps.net/
 
-Demo Link: 
+Demo Link: https://youtu.be/17bDN38Y58M
 
 # List of Azure Services utilized:
 
